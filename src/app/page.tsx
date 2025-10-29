@@ -1,4 +1,32 @@
+'use client';
+
+import { useInsights } from "@/hooks/useInsights";
+
+const placeholderInsights = [
+  {
+    id: "placeholder-1",
+    headline: "Adaptive retail ecosystems",
+    summary:
+      "How modular physical environments are reframing loyalty for global lifestyle brands.",
+  },
+  {
+    id: "placeholder-2",
+    headline: "Generative cultural playbooks",
+    summary:
+      "Co-creation with audiences to build resonance — and how to measure the signals that matter.",
+  },
+  {
+    id: "placeholder-3",
+    headline: "Responsible AI activation",
+    summary:
+      "Designing equitable services powered by AI with transparent guardrails and clear governance.",
+  },
+];
+
 export default function Home() {
+  const { data: insights, loading: isLoading, error } = useInsights();
+  const items = insights.length > 0 ? insights : placeholderInsights;
+
   return (
     <div className="min-h-screen bg-[color:var(--color-surface)] text-[color:var(--color-text)]">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6 md:px-10">
@@ -174,25 +202,9 @@ export default function Home() {
             </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                headline: "Adaptive retail ecosystems",
-                summary:
-                  "How modular physical environments are reframing loyalty for global lifestyle brands.",
-              },
-              {
-                headline: "Generative cultural playbooks",
-                summary:
-                  "Co-creation with audiences to build resonance — and how to measure the signals that matter.",
-              },
-              {
-                headline: "Responsible AI activation",
-                summary:
-                  "Designing equitable services powered by AI with transparent guardrails and clear governance.",
-              },
-            ].map((insight) => (
+            {items.map((insight) => (
               <article
-                key={insight.headline}
+                key={insight.id ?? insight.headline}
                 className="flex flex-col gap-4 rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-surface-strong)] p-7"
               >
                 <h3 className="text-lg font-semibold text-[color:var(--color-accent-strong)]">
@@ -205,6 +217,16 @@ export default function Home() {
               </article>
             ))}
           </div>
+          {isLoading && (
+            <p className="text-xs uppercase tracking-[0.3em] text-[color:var(--color-text-subtle)]">
+              Loading insights…
+            </p>
+          )}
+          {error && !isLoading && (
+            <p className="text-xs text-[color:var(--color-accent-strong)]">
+              Unable to load live insights yet. Showing editorial examples.
+            </p>
+          )}
         </section>
       </main>
 
