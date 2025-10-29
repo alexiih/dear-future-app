@@ -95,3 +95,4 @@ The production image ships the standalone Next.js build (`.next/standalone`) for
 - Define Supabase schema (e.g., `clients`, `projects`, `workshops`) and generate typed clients.
 - Add authentication/authorization and protect client-specific routes.
 - Integrate real Supabase data sources into dashboard sections.
+# dear-future-app
