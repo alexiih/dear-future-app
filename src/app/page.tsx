@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import { useInsights } from "@/hooks/useInsights";
 
 const placeholderInsights = [
@@ -23,138 +24,200 @@ const placeholderInsights = [
   },
 ];
 
+const marqueePhrases = [
+  "IIH Nordic is now Dear Future",
+  "Strategy, data, and design for growth",
+  "AI with accountable impact",
+  "Partnering with ambitious brands",
+];
+
+const services = [
+  {
+    title: "AI-driven growth",
+    copy: "Product, pricing, and campaign experimentation frameworks that deliver measurable commercial results.",
+    image:
+      "linear-gradient(135deg, rgba(172, 95, 67, 0.9), rgba(222, 192, 108, 0.75))",
+  },
+  {
+    title: "Customer intelligence",
+    copy: "Unified data foundations, predictive segmentation, and activation roadmaps tailored to each audience.",
+    image:
+      "linear-gradient(135deg, rgba(72, 94, 122, 0.9), rgba(198, 170, 144, 0.65))",
+  },
+  {
+    title: "AI strategy & enablement",
+    copy: "Roadmaps that align leadership, policy, and product teams around ethical and efficient AI adoption.",
+    image:
+      "linear-gradient(135deg, rgba(61, 96, 126, 0.85), rgba(195, 135, 84, 0.7))",
+  },
+  {
+    title: "Experience orchestration",
+    copy: "Service design, content systems, and operational playbooks that scale delight across every touchpoint.",
+    image:
+      "linear-gradient(135deg, rgba(39, 75, 88, 0.85), rgba(192, 117, 104, 0.72))",
+  },
+] as const;
+
 export default function Home() {
   const { data: insights, loading: isLoading, error } = useInsights();
   const items = insights.length > 0 ? insights : placeholderInsights;
 
   return (
     <div className="min-h-screen bg-[color:var(--color-surface)] text-[color:var(--color-text)]">
-      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6 md:px-10">
-        <div className="flex items-center gap-3">
-          <span className="text-2xl font-semibold tracking-[0.4em] text-[color:var(--color-accent)]">
-            DEAR
-          </span>
-          <span className="text-2xl font-semibold tracking-[0.4em] text-[color:var(--color-accent-strong)]">
-            FUTURE
-          </span>
+      <header className="sticky top-0 z-20 border-b border-[color:var(--color-border)] bg-[color:var(--color-surface-strong)]/95 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5 md:px-10">
+          <a href="#top" className="flex items-center">
+            <Image
+              src="/logo-dear-future.png"
+              alt="Dear Future"
+              width={132}
+              height={44}
+              priority
+            />
+          </a>
+          <nav className="hidden items-center gap-8 text-sm font-medium uppercase tracking-[0.3em] md:flex">
+            <a href="#services" className="transition-colors hover:text-[color:var(--color-accent)]">
+              Services
+            </a>
+            <a href="#about" className="transition-colors hover:text-[color:var(--color-accent)]">
+              About us
+            </a>
+            <a href="#insights" className="transition-colors hover:text-[color:var(--color-accent)]">
+              Signals
+            </a>
+            <a href="#contact" className="transition-colors hover:text-[color:var(--color-accent)]">
+              Contact
+            </a>
+          </nav>
+          <a
+            className="rounded-full border border-[color:var(--color-accent)] px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--color-accent)] transition-colors hover:bg-[color:var(--color-accent)] hover:text-[color:var(--color-text-inverse)]"
+            href="#contact"
+          >
+            Book a call
+          </a>
         </div>
-        <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
-          <a className="transition-colors hover:text-[color:var(--color-accent)]" href="#services">
-            Services
-          </a>
-          <a className="transition-colors hover:text-[color:var(--color-accent)]" href="#process">
-            Process
-          </a>
-          <a className="transition-colors hover:text-[color:var(--color-accent)]" href="#insights">
-            Insights
-          </a>
-        </nav>
-        <a
-          className="rounded-full bg-[color:var(--color-accent)] px-5 py-2 text-sm font-semibold text-[color:var(--color-text-inverse)] transition-transform hover:-translate-y-0.5"
-          href="#contact"
-        >
-          Book a call
-        </a>
+        <div className="marquee">
+          <div className="marquee__inner">
+            {[...marqueePhrases, ...marqueePhrases].map((phrase, index) => (
+              <span key={`${phrase}-${index}`} className="tracking-[0.3em]">
+                {phrase}
+              </span>
+            ))}
+          </div>
+        </div>
       </header>
 
-      <main className="mx-auto flex w-full max-w-6xl flex-col gap-24 px-6 pb-24 pt-10 md:px-10 md:pb-32 md:pt-20">
-        <section className="grid gap-16 md:grid-cols-[1.3fr_1fr] md:items-center">
-          <div className="space-y-8">
-            <p className="inline-flex items-center gap-3 rounded-full bg-[color:var(--color-accent-muted)] px-4 py-2 text-sm font-semibold uppercase tracking-[0.35em] text-[color:var(--color-accent-strong)]">
-              Strategic innovation studio
-            </p>
-            <h1 className="text-balance text-4xl font-semibold leading-tight tracking-tight text-[color:var(--color-accent-strong)] md:text-5xl">
-              Build the future your clients dream about.
-            </h1>
-            <p className="max-w-xl text-lg text-[color:var(--color-text-subtle)]">
-              Dear Future helps you turn emerging trends into tangible products, services, and experiences.
-              We align stakeholders, surface the right insights, and deliver pathways from imagination to execution.
-            </p>
-            <div className="flex flex-col gap-4 sm:flex-row">
+      <section id="top" className="relative w-full overflow-hidden border-b border-[color:var(--color-border)]">
+        <div className="absolute inset-0">
+          <Image
+            src="/hero-dear-future.jpg"
+            alt="Dear Future collaboration"
+            fill
+            priority
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-[color:var(--color-overlay)]" />
+        </div>
+        <div className="relative mx-auto flex min-h-[520px] w-full max-w-6xl flex-col justify-end gap-8 px-6 pb-16 pt-24 text-[color:var(--color-text-inverse)] md:min-h-[620px] md:px-10 md:pb-24">
+          <p className="max-w-md text-sm uppercase tracking-[0.35em] text-[rgba(255,255,255,0.75)]">
+            Dear Future, let&apos;s design tomorrow.
+          </p>
+          <h1 className="max-w-2xl text-4xl font-semibold leading-tight md:text-5xl">
+            We changed our name to match our ambition—and we&apos;re helping brands shape what&apos;s next.
+          </h1>
+          <p className="max-w-xl text-base text-[rgba(255,255,255,0.85)] md:text-lg">
+            Dear Future unites data, creativity, and emerging technology to build resilient growth for ambitious
+            organisations. From AI strategy to full experience orchestration, we partner end-to-end.
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <a
+              href="#services"
+              className="inline-flex items-center justify-center rounded-full bg-[color:var(--color-accent)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--color-text-inverse)]"
+            >
+              Explore services
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center rounded-full border border-[color:var(--color-text-inverse)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em]"
+            >
+              Talk to us
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-24 px-6 pb-24 pt-16 md:px-10 md:pb-32">
+        <section id="about" className="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-surface-strong)] p-12 shadow-[0_40px_80px_rgba(45,35,28,0.08)]">
+          <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+            <div className="space-y-3">
+              <p className="text-sm uppercase tracking-[0.35em] text-[color:var(--color-text-subtle)]">
+                What we do
+              </p>
+              <h2 className="max-w-lg text-4xl font-semibold leading-tight text-[color:var(--color-text)] md:text-5xl">
+                Shaping tomorrow with data, design, and accountable AI.
+              </h2>
+            </div>
+            <div className="max-w-xl space-y-4 text-[color:var(--color-text-subtle)]">
+              <p>
+                Since 2015 we&apos;ve helped ambitious organisations turn change into measurable momentum. We pair
+                experimentation with operational rigor, making innovation tangible for marketing, product, and CX teams.
+              </p>
+              <p>
+                Clients like Maersk, Pandora, Velux, and TotalEnergies trust us to translate signals into scalable
+                platforms—grounded in governance, powered by Supabase, and delivered on Vercel.
+              </p>
               <a
-                className="rounded-full bg-[color:var(--color-accent)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.25em] text-[color:var(--color-text-inverse)] transition-transform hover:-translate-y-0.5"
                 href="#contact"
+                className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.3em] text-[color:var(--color-accent)]"
               >
-                Start a project
-              </a>
-              <a
-                className="rounded-full border border-[color:var(--color-border)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.25em] text-[color:var(--color-accent-strong)] transition-colors hover:border-[color:var(--color-accent)]"
-                href="#process"
-              >
-                Our approach
+                Get in touch →
               </a>
             </div>
           </div>
-          <div className="relative grid gap-6 rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-surface-strong)] p-10 shadow-[0_16px_40px_rgba(33,31,30,0.08)]">
-            <div className="text-xs font-semibold uppercase tracking-[0.4em] text-[color:var(--color-text-subtle)]">
-              What clients receive
-            </div>
-            <ul className="space-y-4 text-base text-[color:var(--color-text-subtle)]">
-              <li className="rounded-2xl border border-[color:var(--color-border)] px-4 py-3">
-                Market-sensing dashboards powered by Supabase.
-              </li>
-              <li className="rounded-2xl border border-[color:var(--color-border)] px-4 py-3">
-                Opportunity roadmaps with scenario modeling.
-              </li>
-              <li className="rounded-2xl border border-[color:var(--color-border)] px-4 py-3">
-                Stakeholder workshops, artifacts, and activation plans.
-              </li>
-            </ul>
-            <span className="text-xs text-[color:var(--color-text-subtle)]">
-              Hosted on Vercel, secured by Supabase, delivered with purpose.
-            </span>
+          <div className="mt-12 grid grid-cols-2 gap-6 border-t border-[color:var(--color-border)] pt-8 text-sm text-[color:var(--color-text-subtle)] sm:grid-cols-3 md:grid-cols-6">
+            {["Maersk", "Pandora", "Velux", "TotalEnergies", "Grundfos", "Danske Bank"].map((brand) => (
+              <div key={brand} className="uppercase tracking-[0.3em] text-[color:var(--color-text-subtle)]">
+                {brand}
+              </div>
+            ))}
           </div>
         </section>
 
         <section id="services" className="space-y-10">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div>
-              <h2 className="text-3xl font-semibold text-[color:var(--color-accent-strong)]">Core engagements</h2>
-              <p className="mt-3 max-w-2xl text-[color:var(--color-text-subtle)]">
-                From exploratory research to launch, each engagement combines qualitative insight, quantitative validation,
-                and experiential storytelling.
-              </p>
-            </div>
-            <a
-              href="#contact"
-              className="text-sm font-semibold uppercase tracking-[0.3em] text-[color:var(--color-accent)]"
-            >
-              View full capabilities →
-            </a>
+          <div className="flex flex-col gap-3">
+            <p className="text-sm uppercase tracking-[0.35em] text-[color:var(--color-text-subtle)]">Services</p>
+            <h2 className="max-w-2xl text-4xl font-semibold text-[color:var(--color-text)] md:text-[3.2rem]">
+              We help companies grow with AI.
+            </h2>
+            <p className="max-w-2xl text-[color:var(--color-text-subtle)]">
+              Each engagement blends research, experimentation, and critical implementation to move from slides to
+              real-world impact.
+            </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                title: "Foresight Sprints",
-                description:
-                  "Rapidly align teams on future-state opportunities, with Supabase-backed scenario libraries and signal tracking.",
-                accent: "--brand-blue-01",
-              },
-              {
-                title: "Experience Prototyping",
-                description:
-                  "Prototype the service journey across channels, leveraging real-time collaboration and user testing pipelines.",
-                accent: "--brand-yellow-02",
-              },
-              {
-                title: "Launch Orchestration",
-                description:
-                  "Prepare for roll-out with detailed playbooks, stakeholder training, and measurable activation metrics.",
-                accent: "--brand-maroon",
-              },
-            ].map((service) => (
+          <div className="card-grid">
+            {services.map((service) => (
               <article
                 key={service.title}
-                className="flex flex-col gap-4 rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-surface-strong)] p-8 shadow-[0_10px_30px_rgba(33,31,30,0.04)]"
+                className="flex flex-col gap-6 border border-[color:var(--color-border)] bg-[color:var(--color-surface-strong)] shadow-[0_35px_60px_rgba(45,35,28,0.1)]"
               >
-                <span
-                  className="h-1 w-12 rounded-full"
-                  style={{ backgroundColor: `var(${service.accent})` }}
+                <div
+                  className="aspect-[3/1] w-full"
+                  style={{
+                    backgroundImage: service.image,
+                  }}
                 />
-                <h3 className="text-xl font-semibold text-[color:var(--color-accent-strong)]">
-                  {service.title}
-                </h3>
-                <p className="text-sm text-[color:var(--color-text-subtle)]">{service.description}</p>
+                <div className="flex flex-1 flex-col gap-5 px-8 pb-10">
+                  <h3 className="text-2xl font-semibold text-[color:var(--color-text)]">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-[color:var(--color-text-subtle)]">{service.copy}</p>
+                  <a
+                    href="#contact"
+                    className="mt-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--color-text)] hover:text-[color:var(--color-accent)]"
+                  >
+                    Get in touch →
+                  </a>
+                </div>
               </article>
             ))}
           </div>
@@ -162,56 +225,61 @@ export default function Home() {
 
         <section
           id="process"
-          className="grid gap-10 rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-accent-strong)] px-8 py-12 text-[color:var(--color-text-inverse)] md:grid-cols-[0.8fr_1fr]"
+          className="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-surface-muted)] p-12 md:p-16"
         >
-          <div className="space-y-4">
-            <p className="text-sm uppercase tracking-[0.3em] text-[rgba(255,255,255,0.65)]">
-              Our process
-            </p>
-            <h2 className="text-3xl font-semibold leading-tight">
-              Grounded in research, amplified by technology, executed with craft.
-            </h2>
-            <p className="text-sm text-[rgba(255,255,255,0.75)]">
-              Supabase anchors our data infrastructure, enabling secure client workspaces, dashboards,
-              and automated reporting across the lifecycle of an engagement.
-            </p>
+          <div className="grid gap-12 md:grid-cols-[0.7fr_1fr] md:items-start">
+            <div className="space-y-4">
+              <p className="text-sm uppercase tracking-[0.35em] text-[color:var(--color-text-subtle)]">
+                Our approach
+              </p>
+              <h2 className="text-3xl font-semibold text-[color:var(--color-text)] md:text-[2.8rem]">
+                Research-led, technology-enabled, crafted for adoption.
+              </h2>
+              <p className="text-sm text-[color:var(--color-text-subtle)] md:text-base">
+                Supabase anchors our client workspaces—from collaborative discovery canvases to live dashboards. We
+                orchestrate the journey with measurable checkpoints so momentum never stalls.
+              </p>
+            </div>
+            <ol className="grid gap-6 text-sm text-[color:var(--color-text-subtle)] md:text-base">
+              {[
+                "Discover: audit data foundations, stakeholder goals, and operational realities.",
+                "Design: co-create roadmaps, prototypes, and narratives that align decision-makers.",
+                "Deliver: activate programs with governance, measurement, and embedded teams.",
+              ].map((step, index) => (
+                <li
+                  key={step}
+                  className="flex gap-4 border border-[color:var(--color-border)] bg-[color:var(--color-surface-strong)] px-6 py-5"
+                >
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--color-border-strong)] text-base font-semibold text-[color:var(--color-text)]">
+                    {index + 1}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
           </div>
-          <ol className="grid gap-6 text-sm text-[rgba(255,255,255,0.85)]">
-            {[
-              "Discover: synthesize signals, interviews, and data models.",
-              "Design: translate insights into tangible journey maps and prototypes.",
-              "Deploy: launch with stakeholder playbooks, measurement frameworks, and continuous optimization.",
-            ].map((step, index) => (
-              <li key={step} className="flex gap-4 rounded-2xl bg-[rgba(0,0,0,0.15)] p-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[rgba(255,255,255,0.12)] text-base font-semibold">
-                  {index + 1}
-                </span>
-                <span>{step}</span>
-              </li>
-            ))}
-          </ol>
         </section>
 
         <section id="insights" className="space-y-10">
           <div className="flex flex-col gap-3">
-            <p className="text-sm uppercase tracking-[0.3em] text-[color:var(--color-text-subtle)]">
+            <p className="text-sm uppercase tracking-[0.35em] text-[color:var(--color-text-subtle)]">
               Latest signals
             </p>
-            <h2 className="text-3xl font-semibold text-[color:var(--color-accent-strong)]">
+            <h2 className="text-3xl font-semibold text-[color:var(--color-text)] md:text-[2.6rem]">
               Stories shaping tomorrow
             </h2>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="card-grid md:grid-cols-3">
             {items.map((insight) => (
               <article
                 key={insight.id ?? insight.headline}
-                className="flex flex-col gap-4 rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-surface-strong)] p-7"
+                className="flex flex-col gap-5 border border-[color:var(--color-border)] bg-[color:var(--color-surface-strong)] p-8 shadow-[0_30px_50px_rgba(45,35,28,0.08)]"
               >
-                <h3 className="text-lg font-semibold text-[color:var(--color-accent-strong)]">
+                <h3 className="text-xl font-semibold text-[color:var(--color-text)]">
                   {insight.headline}
                 </h3>
                 <p className="text-sm text-[color:var(--color-text-subtle)]">{insight.summary}</p>
-                <button className="w-max text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--color-accent)]">
+                <button className="mt-auto w-max text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--color-accent)]">
                   Read insight →
                 </button>
               </article>
@@ -223,49 +291,95 @@ export default function Home() {
             </p>
           )}
           {error && !isLoading && (
-            <p className="text-xs text-[color:var(--color-accent-strong)]">
+            <p className="text-xs text-[color:var(--color-accent)]">
               Unable to load live insights yet. Showing editorial examples.
             </p>
           )}
         </section>
+
+        <section
+          id="contact"
+          className="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-surface-strong)] p-12 md:p-16"
+        >
+          <div className="grid gap-12 md:grid-cols-[0.8fr_1fr] md:items-start">
+            <div className="space-y-4">
+              <p className="text-sm uppercase tracking-[0.35em] text-[color:var(--color-text-subtle)]">
+                Contact
+              </p>
+              <h2 className="text-4xl font-semibold text-[color:var(--color-text)] md:text-[2.8rem]">
+                Let&apos;s talk about your future.
+              </h2>
+              <p className="text-sm text-[color:var(--color-text-subtle)]">
+                Tell us about your organisation, your industry, and the outcomes you&apos;re building toward. We&apos;ll
+                curate a Supabase-powered workspace tailored to your brief.
+              </p>
+            </div>
+            <form className="grid gap-4">
+              <div className="grid gap-4 md:grid-cols-2">
+                <label className="flex flex-col gap-2 text-xs uppercase tracking-[0.35em] text-[color:var(--color-text-subtle)]">
+                  First name*
+                  <input className="form-field" type="text" name="firstName" placeholder="Jane" />
+                </label>
+                <label className="flex flex-col gap-2 text-xs uppercase tracking-[0.35em] text-[color:var(--color-text-subtle)]">
+                  Last name*
+                  <input className="form-field" type="text" name="lastName" placeholder="Doe" />
+                </label>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                <label className="flex flex-col gap-2 text-xs uppercase tracking-[0.35em] text-[color:var(--color-text-subtle)]">
+                  Email*
+                  <input className="form-field" type="email" name="email" placeholder="you@company.com" />
+                </label>
+                <label className="flex flex-col gap-2 text-xs uppercase tracking-[0.35em] text-[color:var(--color-text-subtle)]">
+                  Phone
+                  <input className="form-field" type="tel" name="phone" placeholder="+45 00 00 00 00" />
+                </label>
+              </div>
+              <label className="flex flex-col gap-2 text-xs uppercase tracking-[0.35em] text-[color:var(--color-text-subtle)]">
+                Organisation & project notes
+                <textarea
+                  className="form-field min-h-[160px] resize-none"
+                  name="message"
+                  placeholder="Share your industry, challenge, and timeline."
+                />
+              </label>
+              <label className="flex items-start gap-3 text-xs text-[color:var(--color-text-subtle)]">
+                <input type="checkbox" className="mt-1 h-4 w-4 border border-[color:var(--color-border-strong)]" />
+                <span>
+                  I agree to be contacted about Dear Future services. We respect your data and follow GDPR obligations.
+                </span>
+              </label>
+              <button
+                type="submit"
+                className="mt-2 inline-flex w-max items-center justify-center bg-[color:var(--color-accent)] px-8 py-3 text-xs font-semibold uppercase tracking-[0.4em] text-[color:var(--color-text-inverse)] transition-colors hover:bg-[color:var(--color-accent-strong)]"
+              >
+                Send
+              </button>
+            </form>
+          </div>
+        </section>
       </main>
 
-      <footer
-        id="contact"
-        className="border-t border-[color:var(--color-border)] bg-[color:var(--color-surface-strong)]"
-      >
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 py-14 md:flex-row md:items-center md:justify-between md:px-10">
-          <div className="space-y-3">
-            <h2 className="text-2xl font-semibold text-[color:var(--color-accent-strong)]">
-              Let&apos;s architect what&apos;s next.
-            </h2>
-            <p className="max-w-md text-sm text-[color:var(--color-text-subtle)]">
-              Share your challenge and we&apos;ll build a Supabase-backed collaboration space for rapid alignment.
-            </p>
+      <footer className="border-t border-[color:var(--color-border)] bg-[color:var(--color-surface-muted)]">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-10 md:flex-row md:items-center md:justify-between md:px-10">
+          <div className="flex items-center gap-4">
+            <Image
+              src="/logo-dear-future.png"
+              alt="Dear Future"
+              width={110}
+              height={36}
+            />
+            <span className="text-xs uppercase tracking-[0.35em] text-[color:var(--color-text-subtle)]">
+              © {new Date().getFullYear()}
+            </span>
           </div>
-          <form className="grid w-full max-w-md gap-4">
-            <input
-              type="text"
-              name="name"
-              placeholder="Your name"
-              className="rounded-full border border-[color:var(--color-border)] bg-white px-5 py-3 text-sm outline-none transition-shadow focus:ring-2 focus:ring-[color:var(--color-accent)]"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Work email"
-              className="rounded-full border border-[color:var(--color-border)] bg-white px-5 py-3 text-sm outline-none transition-shadow focus:ring-2 focus:ring-[color:var(--color-accent)]"
-            />
-            <button
-              type="submit"
-              className="rounded-full bg-[color:var(--color-accent)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-[color:var(--color-text-inverse)] transition-transform hover:-translate-y-0.5"
-            >
-              Submit inquiry
-            </button>
-          </form>
-        </div>
-        <div className="border-t border-[color:var(--color-border)] bg-[color:var(--color-surface)] py-6 text-center text-xs text-[color:var(--color-text-subtle)]">
-          © {new Date().getFullYear()} Dear Future. Crafted with curiosity.
+          <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.3em] text-[color:var(--color-text-subtle)]">
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#insights">Signals</a>
+            <a href="#contact">Contact</a>
+            <span>DA / EN</span>
+          </div>
         </div>
       </footer>
     </div>
